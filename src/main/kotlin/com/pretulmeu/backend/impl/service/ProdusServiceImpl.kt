@@ -81,7 +81,7 @@ internal class ProdusServiceImpl(
     override fun deleteProduct(id: Long) {
         val el = produsRepo
             .findById(id)
-        if(el.isEmpty || !securityService.checkSameUser(el.get().user)){
+        if(!el.isPresent || !securityService.checkSameUser(el.get().user)){
             throw ProductDoesNotExist("Product does not exist")
         }
         val prod = el.get()
@@ -103,7 +103,7 @@ internal class ProdusServiceImpl(
     override fun getProductById(id: Long): ProdusDto {
         val el = produsRepo
             .findById(id)
-        if(el.isEmpty || !securityService.checkSameUser(el.get().user)){
+        if(!el.isPresent || !securityService.checkSameUser(el.get().user)){
             throw ProductDoesNotExist("Product does not exist")
         }
         return el.get().toDto()
@@ -113,7 +113,7 @@ internal class ProdusServiceImpl(
     override fun deleteLink(id: Long) {
         val el = shopProductRepo
             .findById(id)
-        if(el.isEmpty || !securityService.checkSameUser(el.get().product.user)){
+        if(!el.isPresent || !securityService.checkSameUser(el.get().product.user)){
             throw ProductDoesNotExist("Product does not exist")
         }
         val sp = el.get()
@@ -155,7 +155,7 @@ internal class ProdusServiceImpl(
         }
         val el = produsRepo
             .findById(id)
-        if(el.isEmpty || !securityService.checkSameUser(el.get().user)){
+        if(!el.isPresent || !securityService.checkSameUser(el.get().user)){
             throw ProductDoesNotExist("Product does not exist")
         }
         val prds = el.get()
@@ -171,7 +171,7 @@ internal class ProdusServiceImpl(
     override fun getShopProduct(id: Long): ShopProductDto {
         val el = shopProductRepo
             .findById(id)
-        if(el.isEmpty || !securityService.checkSameUser(el.get().product.user)){
+        if(!el.isPresent || !securityService.checkSameUser(el.get().product.user)){
             throw ProductDoesNotExist("Product does not exist")
         }
         return el.get().toDto()
