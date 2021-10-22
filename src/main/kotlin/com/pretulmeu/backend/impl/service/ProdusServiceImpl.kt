@@ -143,7 +143,9 @@ internal class ProdusServiceImpl(
             x.start()
             ths.add(x)
         }
-        ths.forEach { it.join() }
+        if(ths.isNotEmpty()) {
+            ths.forEach { it.join() }
+        }
         pricePerDateRepo.saveAll(toSave)
     }
 
