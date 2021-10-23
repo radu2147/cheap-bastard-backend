@@ -26,7 +26,12 @@ abstract class ShopProvider {
         if(url.length >= 500){
             throw UrlTooLongException("Url is too long. Try another product")
         }
-        val doc: Document = Jsoup.connect(url).get()
+        val conn = Jsoup.connect(url)
+        conn.userAgent("Mozilla/5.0");
+
+        //set timeout to 10 seconds
+        conn.timeout(10 * 1000);
+        val doc: Document = conn.get()
         val productName = getProductNameTag(doc)
         val productPic = getImage(doc)
         val productPrice = getPrice(doc)
