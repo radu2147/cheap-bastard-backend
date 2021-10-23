@@ -11,7 +11,7 @@ class EvomagShopProvider: ShopProvider() {
 
     override fun getImage(doc: Document): String {
         val el =  doc.select(".product_info_area .MainProductGallery img").map { it.attr("src") }
-        if(el.size != 1){
+        if(el.isEmpty()){
             throw InvalidSelectorException("Invalid selector for provider with name ${name}")
         }
         return el[0]
@@ -19,7 +19,7 @@ class EvomagShopProvider: ShopProvider() {
 
     override fun getProductNameTag(doc: Document): String {
         val el = doc.select(".product_info_area .product_name").map { if(it.text().length < 100) it.text() else it.text().subSequence(0,100).toString() + "..." }
-        if(el.size != 1){
+        if(el.isEmpty()){
             throw InvalidSelectorException("Invalid selector for provider with name ${name}")
         }
         return el[0]
@@ -27,7 +27,7 @@ class EvomagShopProvider: ShopProvider() {
 
     override fun getPrice(doc: Document): Float {
         val el = doc.select(".product_info_area .pret_rons").map { it.textNodes()[0].text() }
-        if(el.size != 1){
+        if(el.isEmpty()){
             throw InvalidSelectorException("Invalid selector for provider with name ${name}")
         }
         return el[0].split(",")[0].toFloat()
