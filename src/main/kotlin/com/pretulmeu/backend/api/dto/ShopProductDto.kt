@@ -7,5 +7,6 @@ data class ShopProductDto(
     val name: String,
     val link: String?,
     val history: Set<PricePerDateDto>?,
-    val provider: String? = link?.let{ ShopProvider.getProviderName(it) }
+    val currentPrice: Float? = null,
+    val provider: String? = link?.let{ ShopProvider.getProviderName(it) },
 )

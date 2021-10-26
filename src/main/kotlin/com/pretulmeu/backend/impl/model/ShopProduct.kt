@@ -23,7 +23,7 @@ internal class ShopProduct(
     var history: MutableSet<PricePerDate>? = null
 
     fun toDto(): ShopProductDto{
-        return ShopProductDto(this.id, this.name, this.link, this.history?.map { it.toDto() }?.toSet())
+        return ShopProductDto(this.id, this.name, this.link, this.history?.map { it.toDto() }?.toSet(), this.history?.maxByOrNull { it.date }?.price)
     }
 
 }
