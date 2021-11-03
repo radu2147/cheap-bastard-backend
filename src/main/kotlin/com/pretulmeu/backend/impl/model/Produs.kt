@@ -32,6 +32,6 @@ internal class Produs(
     }
 
     private fun computeLowestPrice(): Float? {
-        return this.shopProducts?.map { it.history?.minByOrNull { it.price }?.price ?: Float.MAX_VALUE}?.minByOrNull { it }
+        return this.shopProducts?.map { it.history?.maxByOrNull { it.date }?.price ?: Float.MAX_VALUE}?.minByOrNull { it }
     }
 }

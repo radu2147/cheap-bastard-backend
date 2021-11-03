@@ -8,6 +8,7 @@ import com.pretulmeu.backend.impl.exceptions.NoExistingProviderException
 import com.pretulmeu.backend.impl.exceptions.UrlTooLongException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.net.Proxy
 import java.sql.Date
 import java.util.*
 
@@ -27,8 +28,7 @@ abstract class ShopProvider {
             throw UrlTooLongException("Url is too long. Try another product")
         }
         val conn = Jsoup.connect(url)
-        conn.userAgent("Mozilla/5.0");
-
+        conn.userAgent("Mozilla/5.0")
         //set timeout to 10 seconds
         conn.timeout(10 * 1000);
         val doc: Document = conn.get()
